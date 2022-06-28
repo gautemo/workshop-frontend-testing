@@ -41,7 +41,7 @@ export function Lane(props: Props) {
       data-cy={`lane-${props.lane}`}
 		>
 			<h2>
-				{props.lane} - <span>{tasksInLane.length}</span>
+				{props.lane} - <span data-cy="count">{tasksInLane.length}</span>
 			</h2>
 			<ul>
 				{tasksInLane.map((task) => (
