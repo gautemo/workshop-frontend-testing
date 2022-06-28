@@ -17,3 +17,9 @@ jobs:
         run: npx prettier --check .
       - name: ESLint
         run: npx eslint . --max-warnings=0
+      - name: Vitest
+        run: pnpm test:unit
+      - name: Cypress
+        run: pnpm test:cypress
+      - name: Cypress component
+        run: pnpm test:cypress:component
