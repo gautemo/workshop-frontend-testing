@@ -1,0 +1,12 @@
+name: PR
+
+on: pull_request
+
+jobs:
+  format_lint_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Prettier
+        run: npx prettier --check .
