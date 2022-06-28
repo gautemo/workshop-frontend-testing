@@ -1,0 +1,14 @@
+.label {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0.5rem;
+}
+
+.label input {
+	width: 100%;
+	font-size: 1.2rem;
+	border-radius: 10px;
+	border: 1px solid gray;
+	padding: 12px;
+	box-sizing: border-box;
+}

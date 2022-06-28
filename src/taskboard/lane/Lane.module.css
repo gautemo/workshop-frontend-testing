@@ -1,0 +1,31 @@
+.lane {
+	background-color: rgba(209, 209, 209, 0.425);
+	border-radius: 10px;
+}
+
+.lane h2 {
+	text-align: center;
+	margin: 0;
+	padding: 0.25rem 0;
+	background-color: #ffd22eb6;
+	border-radius: 10px 10px 0 0;
+}
+
+.lane ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.lane li {
+	border: 2px solid #ffd22eb6;
+	background-color: rgba(255, 255, 255, 0.7);
+	min-height: 50px;
+	padding: 5px;
+	margin: 5px 0;
+	cursor: grab;
+}
+
+.active {
+	border: 2px dashed #51ff2eb6;
+}
