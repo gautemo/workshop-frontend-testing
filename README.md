@@ -13,6 +13,14 @@
 
 - `pnpm dev`
 
+## Run tests
+
+- `pnpm test:unit:watch` vitest watchmode
+- `pnpm test:unit` vitest one time,
+- `pnpm test:cypress:open` cypress ui
+- `pnpm test:cypress` cypress e2e headless
+- `pnpm test:cypress:component` cypress component headless
+
 ## Tasks
 
 1. Set up testing frameworks  
