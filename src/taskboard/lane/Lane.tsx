@@ -38,6 +38,7 @@ export function Lane(props: Props) {
 			onDrop={onDrop}
 			onDragOver={onDragOver}
 			onDragLeave={onDragLeave}
+      data-cy={`lane-${props.lane}`}
 		>
 			<h2>
 				{props.lane} - <span>{tasksInLane.length}</span>
