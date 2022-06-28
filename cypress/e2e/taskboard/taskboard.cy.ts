@@ -42,4 +42,31 @@ describe('taskboard', () => {
     cy.dataCy('lane-doing').dataCy('count').contains('1')
     cy.dataCy('lane-done').dataCy('count').contains('1')
 	})
+
+  it('Tasks should be added to correct lane', () => {
+		localStorage.setItem('tasks', JSON.stringify([
+      {
+        id: '1',
+        description: 'do1',
+        state: 'todo',
+        updated: new Date().getTime(),
+      },
+      {
+        id: '2',
+        description: 'do2',
+        state: 'doing',
+        updated: new Date().getTime(),
+      },
+      {
+        id: '3',
+        description: 'do3',
+        state: 'done',
+        updated: new Date().getTime(),
+      },
+    ]))
+    cy.visit('/')
+    cy.dataCy('lane-todo').contains('do1')
+    cy.dataCy('lane-doing').contains('do2')
+    cy.dataCy('lane-done').contains('do3')
+	})
 })
