@@ -1,10 +1,11 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { ErrorBox } from './errorbox/ErrorBox'
-import { getTasks, saveTasks } from './taskService'
+import { getActiveTasks, getNumberOfTasksMissed, saveTasks } from './taskadapter/service'
 import { State, Task } from './types'
 
 type Store = {
 	tasks: Task[]
+	missedTasks: number
 	moveTask: (id: string, toState: State) => void
 	addTask: (description: string) => void
 }
@@ -13,10 +14,12 @@ export const StoreContext = createContext<Store | undefined>(undefined)
 
 export function TaskBoardProvider(props: { children: ReactNode }) {
 	const [tasks, setTasks] = useState<Task[]>([])
+	const [missedTasks, setMissedTasks] = useState(0)
 	const [error, setError] = useState<string | null>(null)
+
 	useEffect(() => {
 		try {
-			setTasks(getTasks())
+			setTasks(getActiveTasks())
 		} catch (error) {
 			if (error instanceof Error) {
 				setError(error.message)
@@ -24,6 +27,7 @@ export function TaskBoardProvider(props: { children: ReactNode }) {
 				setError('Could not get tasks')
 			}
 		}
+		setMissedTasks(getNumberOfTasksMissed())
 	}, [])
 
 	function moveTask(id: string, toState: State) {
@@ -47,7 +51,7 @@ export function TaskBoardProvider(props: { children: ReactNode }) {
 	}
 
 	return (
-		<StoreContext.Provider value={{ tasks, moveTask, addTask }}>
+		<StoreContext.Provider value={{ tasks, missedTasks, moveTask, addTask }}>
 			{error && <ErrorBox message={error} />}
 			{!error && props.children}
 		</StoreContext.Provider>
