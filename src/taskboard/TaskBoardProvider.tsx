@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { ErrorBox } from './errorbox/ErrorBox'
 import { getTasks, saveTasks } from './taskService'
 import { State, Task } from './types'
 
@@ -12,8 +13,17 @@ export const StoreContext = createContext<Store | undefined>(undefined)
 
 export function TaskBoardProvider(props: { children: ReactNode }) {
 	const [tasks, setTasks] = useState<Task[]>([])
+	const [error, setError] = useState<string | null>(null)
 	useEffect(() => {
-		setTasks(getTasks())
+		try {
+			setTasks(getTasks())
+		} catch (error) {
+			if (error instanceof Error) {
+				setError(error.message)
+			} else {
+				setError('Could not get tasks')
+			}
+		}
 	}, [])
 
 	function moveTask(id: string, toState: State) {
@@ -36,7 +46,12 @@ export function TaskBoardProvider(props: { children: ReactNode }) {
 		saveTasks(updatedTasks)
 	}
 
-	return <StoreContext.Provider value={{ tasks, moveTask, addTask }}>{props.children}</StoreContext.Provider>
+	return (
+		<StoreContext.Provider value={{ tasks, moveTask, addTask }}>
+			{error && <ErrorBox message={error} />}
+			{!error && props.children}
+		</StoreContext.Provider>
+	)
 }
 
 export const useStore = () => {
