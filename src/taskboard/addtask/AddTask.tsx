@@ -14,7 +14,7 @@ export function AddTask() {
 	return (
 		<label className={styles.label}>
 			<span>Do something cool?</span>
-			<input type="text" onKeyDown={handleKeyDown} data-cy="add-task"/>
+			<input type="text" onKeyDown={handleKeyDown} data-cy="add-task" />
 		</label>
 	)
 }

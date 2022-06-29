@@ -42,7 +42,7 @@ describe.concurrent('task adapter service', () => {
 					state: 'todo',
 					updated: new Date().getTime() - 1000 * 120,
 				},
-        {
+				{
 					id: '3',
 					description: '2 minuts old',
 					state: 'done',
